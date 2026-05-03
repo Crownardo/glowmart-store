@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>GlowMart – Cosmetics, Perfume & Accessories</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C97A;
+    --gold-dark: #8B6914;
+    --black: #0D0D0D;
+    --dark: #1A1A1A;
+    --dark2: #252525;
+    --white: #FFFFFF;
+    --offwhite: #F9F6EF;
+    --text-muted: #B0A090;
+    --radius: 8px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--black);
+    color: var(--white);
+    overflow-x: hidden;
+  }
+
+  /* ── TOP BAR ── */
+  .topbar {
+    background: var(--gold);
+    text-align: center;
+    padding: 8px;
+    font-size: 13px;
+    color: var(--black);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--dark);
+    border-bottom: 1px solid #2a2a2a;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+  }
+
+  .header-main {
+    max-width: 1300px;
+    margin: auto;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--gold);
+    text-decoration: none;
+    white-space: nowrap;
+    letter-spacing: 1px;
+  }
+
+  .logo span { color: var(--white); }
+
+  .search-bar {
+    flex: 1;
+    display: flex;
+    background: var(--dark2);
+    border: 1.5px solid var(--gold-dark);
+    border-radius: 6px;
+    overflow: hidden;
+    max-width: 600px;
+  }
+
+  .search-bar input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: 10px 16px;
+    font-size: 14px;
+    color: var(--white);
+    font-family: 'Outfit', sans-serif;
+  }
+
+  .search-bar input::placeholder { color: var(--text-muted); }
+
+  .search-bar button {
+    background: var(--gold);
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--black);
+    transition: background 0.2s;
+  }
+
+  .search-bar button:hover { background: var(--gold-light); }
+
+  .header-icons {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-left: auto;
+  }
+
+  .icon-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    cursor: pointer;
+    text-decoration: none;
+    color: var(--white);
+    font-size: 11px;
+    transition: color 0.2s;
+  }
+
+  .icon-btn:hover { color: var(--gold); }
+  .icon-btn svg { width: 22px; height: 22px; }
+
+  .cart-badge {
+    position: relative;
+  }
+
+  .badge {
+    position: absolute;
+    top: -6px; right: -6px;
+    background: var(--gold);
+    color: var(--black);
+    border-radius: 50%;
+    width: 17px; height: 17px;
+    font-size: 10px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ── NAV ── */
+  nav {
+    background: var(--dark2);
+    border-bottom: 1px solid #2a2a2a;
+  }
+
+  .nav-inner {
+    max-width: 1300px;
+    margin: auto;
+    padding: 0 20px;
+    display: flex;
+    gap: 4px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .nav-inner::-webkit-scrollbar { display: none; }
+
+  .nav-inner a {
+    padding: 12px 16px;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: #ccc;
+    text-decoration: none;
+    white-space: nowrap;
+    border-bottom: 2.5px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .nav-inner a:hover,
+  .nav-inner a.active {
+    color: var(--gold);
+    border-bottom-color: var(--gold);
+  }
+
+  /* ── HERO BANNER ── */
+  .hero {
+    background: linear-gradient(135deg, #0D0D0D 0%, #1a1200 50%, #0D0D0D 100%);
+    position: relative;
+    overflow: hidden;
+    padding: 70px 20px;
+    text-align: center;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, rgba(201,168,76,0.18) 0%, transparent 70%);
+  }
+
+  .hero-inner {
+    max-width: 700px;
+    margin: auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--black);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    padding: 5px 14px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(38px, 6vw, 68px);
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--white);
+    animation: fadeUp 0.7s 0.1s ease both;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .hero p {
+    color: var(--text-muted);
+    font-size: 16px;
+    margin-top: 16px;
+    line-height: 1.6;
+    animation: fadeUp 0.7s 0.2s ease both;
+  }
+
+  .hero-btns {
+    margin-top: 32px;
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: fadeUp 0.7s 0.3s ease both;
+  }
+
+  .btn-gold {
+    background: var(--gold);
+    color: var(--black);
+    border: none;
+    padding: 13px 32px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.2s;
+    font-family: 'Outfit', sans-serif;
+  }
+
+  .btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--gold);
+    border: 1.5px solid var(--gold);
+    padding: 13px 32px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s;
+    font-family: 'Outfit', sans-serif;
+  }
+
+  .btn-outline:hover { background: var(--gold); color: var(--black); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── CATEGORY PILLS ── */
+  .categories {
+    max-width: 1300px;
+    margin: 40px auto;
+    padding: 0 20px;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 20px;
+  }
+
+  .section-title span { color: var(--gold); }
+
+  .cat-grid {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+
+  .cat-card {
+    flex: 1;
+    min-width: 140px;
+    background: var(--dark2);
+    border: 1px solid #2f2f2f;
+    border-radius: 10px;
+    padding: 22px 16px;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+    transition: border-color 0.2s, transform 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .cat-card:hover {
+    border-color: var(--gold);
+    transform: translateY(-4px);
+  }
+
+  .cat-icon { font-size: 32px; }
+
+  .cat-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--white);
+  }
+
+  .cat-count {
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+
+  /* ── FLASH SALE BANNER ── */
+  .flash-banner {
+    max-width: 1300px;
+    margin: 0 auto 40px;
+    padding: 0 20px;
+  }
+
+  .flash-inner {
+    background: linear-gradient(90deg, #1a0f00, #2d1f00, #1a0f00);
+    border: 1px solid var(--gold-dark);
+    border-radius: 12px;
+    padding: 20px 28px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .flash-label {
+    background: var(--gold);
+    color: var(--black);
+    font-weight: 700;
+    font-size: 13px;
+    padding: 6px 14px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+
+  .flash-text {
+    font-size: 15px;
+    color: var(--white);
+    flex: 1;
+  }
+
+  .flash-timer {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .timer-box {
+    background: var(--dark);
+    border: 1px solid var(--gold-dark);
+    border-radius: 6px;
+    padding: 8px 12px;
+    text-align: center;
+    min-width: 50px;
+  }
+
+  .timer-num {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--gold);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .timer-label { font-size: 10px; color: var(--text-muted); }
+  .timer-sep { color: var(--gold); font-size: 20px; font-weight: 700; }
+
+  /* ── PRODUCTS GRID ── */
+  .products-section {
+    max-width: 1300px;
+    margin: 0 auto 50px;
+    padding: 0 20px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .view-all {
+    font-size: 13px;
+    color: var(--gold);
+    text-decoration: none;
+    font-weight: 500;
+    border: 1px solid var(--gold-dark);
+    padding: 6px 14px;
+    border-radius: 20px;
+    transition: background 0.2s;
+  }
+
+  .view-all:hover { background: var(--gold); color: var(--black); }
+
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    gap: 16px;
+  }
+
+  .product-card {
+    background: var(--dark2);
+    border: 1px solid #2a2a2a;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .product-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--gold-dark);
+    box-shadow: 0 8px 30px rgba(201,168,76,0.15);
+  }
+
+  .product-img {
+    background: #1e1e1e;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .product-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
+  }
+
+  .product-card:hover .product-img img { transform: scale(1.06); }
+
+  .product-badges {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .badge-tag {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .badge-sale { background: #c0392b; color: white; }
+  .badge-new { background: var(--gold); color: var(--black); }
+  .badge-hot { background: #e67e22; color: white; }
+
+  .wishlist-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0,0,0,0.6);
+    border: none;
+    border-radius: 50%;
+    width: 32px; height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .wishlist-btn:hover { background: var(--gold); }
+  .wishlist-btn svg { width: 16px; height: 16px; fill: none; stroke: white; stroke-width: 2; }
+
+  .product-info {
+    padding: 14px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .product-brand {
+    font-size: 10px;
+    color: var(--gold);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .product-name {
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--white);
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .product-rating {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  .stars { color: var(--gold); font-size: 11px; }
+
+  .product-price-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 4px;
+  }
+
+  .price-new {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--gold);
+  }
+
+  .price-old {
+    font-size: 12px;
+    color: var(--text-muted);
+    text-decoration: line-through;
+  }
+
+  .discount-pct {
+    font-size: 11px;
+    background: rgba(192,57,43,0.2);
+    color: #e74c3c;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-weight: 600;
+  }
+
+  .add-cart-btn {
+    margin-top: 10px;
+    background: var(--gold);
+    color: var(--black);
+    border: none;
+    border-radius: 6px;
+    padding: 9px;
+    width: 100%;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'Outfit', sans-serif;
+    transition: background 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  .add-cart-btn:hover { background: var(--gold-light); }
+
+  .aliexpress-tag {
+    font-size: 10px;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 4px;
+  }
+
+  .aliexpress-tag span {
+    color: #e74c3c;
+    font-weight: 600;
+  }
+
+  /* ── PROMO STRIP ── */
+  .promo-strip {
+    max-width: 1300px;
+    margin: 0 auto 50px;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+  }
+
+  .promo-card {
+    background: var(--dark2);
+    border: 1px solid #2a2a2a;
+    border-radius: 10px;
+    padding: 22px;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    transition: border-color 0.2s;
+  }
+
+  .promo-card:hover { border-color: var(--gold-dark); }
+
+  .promo-icon { font-size: 34px; }
+
+  .promo-title { font-size: 14px; font-weight: 600; color: var(--white); }
+  .promo-desc { font-size: 12px; color: var(--text-muted); margin-top: 3px; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--dark);
+    border-top: 1px solid #2a2a2a;
+    padding: 50px 20px 30px;
+  }
+
+  .footer-inner {
+    max-width: 1300px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+
+  .footer-brand .logo { font-size: 26px; display: block; margin-bottom: 12px; }
+
+  .footer-brand p {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    max-width: 260px;
+  }
+
+  .footer-col h4 {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 14px;
+  }
+
+  .footer-col a {
+    display: block;
+    font-size: 13px;
+    color: var(--text-muted);
+    text-decoration: none;
+    margin-bottom: 8px;
+    transition: color 0.2s;
+  }
+
+  .footer-col a:hover { color: var(--white); }
+
+  .footer-bottom {
+    max-width: 1300px;
+    margin: 30px auto 0;
+    padding-top: 20px;
+    border-top: 1px solid #2a2a2a;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .footer-bottom p { font-size: 12px; color: var(--text-muted); }
+
+  .pay-icons { display: flex; gap: 8px; }
+
+  .pay-icon {
+    background: #2a2a2a;
+    border-radius: 4px;
+    padding: 4px 10px;
+    font-size: 11px;
+    color: var(--text-muted);
+    font-weight: 600;
+  }
+
+  /* ── CART TOAST ── */
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: var(--dark2);
+    border: 1px solid var(--gold);
+    border-radius: 10px;
+    padding: 14px 20px;
+    font-size: 14px;
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 9999;
+    transform: translateY(100px);
+    opacity: 0;
+    transition: all 0.3s;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+  }
+
+  .toast.show { transform: translateY(0); opacity: 1; }
+  .toast-icon { color: var(--gold); font-size: 18px; }
+
+  /* ── RESPONSIVE ── */
+  @media(max-width: 900px) {
+    .footer-inner { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media(max-width: 620px) {
+    .header-main { flex-wrap: wrap; }
+    .search-bar { order: 3; max-width: 100%; width: 100%; }
+    .footer-inner { grid-template-columns: 1fr; gap: 24px; }
+    .flash-inner { flex-direction: column; align-items: flex-start; }
+  }
+
+  /* scrollbar */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--dark); }
+  ::-webkit-scrollbar-thumb { background: var(--gold-dark); border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">🚚 Free Delivery on orders over ₦20,000 &nbsp;|&nbsp; 🌟 Authentic Products Linked from AliExpress</div>
+
+<!-- HEADER -->
+<header>
+  <div class="header-main">
+    <a href="#" class="logo">Glow<span>Mart</span></a>
+
+    <div class="search-bar">
+      <input type="text" placeholder="Search cosmetics, perfumes, accessories…" id="searchInput"/>
+      <button onclick="doSearch()">Search</button>
+    </div>
+
+    <div class="header-icons">
+      <a href="#" class="icon-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        Account
+      </a>
+      <a href="#" class="icon-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        Wishlist
+      </a>
+      <a href="#" class="icon-btn cart-badge" onclick="openCart()">
+        <div style="position:relative">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+          <span class="badge" id="cartCount">0</span>
+        </div>
+        Cart
+      </a>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="active">All Products</a>
+      <a href="#cosmetics" onclick="filterCat('cosmetics')">💄 Cosmetics</a>
+      <a href="#perfumes" onclick="filterCat('perfumes')">🌸 Perfumes</a>
+      <a href="#accessories" onclick="filterCat('accessories')">💍 Accessories</a>
+      <a href="#face" onclick="filterCat('face')">✨ Face Care</a>
+      <a href="#deals">🔥 Flash Deals</a>
+      <a href="#new">🆕 New Arrivals</a>
+    </div>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">✦ Premium Beauty Store</div>
+    <h1>Beauty That <em>Shines</em><br/>Every Day</h1>
+    <p>Discover luxury cosmetics, fragrances, and accessories — all sourced from top AliExpress sellers and delivered to your door.</p>
+    <div class="hero-btns">
+      <a href="#products" class="btn-gold">Shop Now →</a>
+      <a href="#deals" class="btn-outline">View Flash Deals</a>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<section class="categories">
+  <h2 class="section-title">Shop by <span>Category</span></h2>
+  <div class="cat-grid">
+    <a class="cat-card" href="#" onclick="filterCat('cosmetics')">
+      <div class="cat-icon">💄</div>
+      <div class="cat-name">Cosmetics</div>
+      <div class="cat-count">48 Products</div>
+    </a>
+    <a class="cat-card" href="#" onclick="filterCat('perfumes')">
+      <div class="cat-icon">🌸</div>
+      <div class="cat-name">Perfumes</div>
+      <div class="cat-count">32 Products</div>
+    </a>
+    <a class="cat-card" href="#" onclick="filterCat('accessories')">
+      <div class="cat-icon">💍</div>
+      <div class="cat-name">Accessories</div>
+      <div class="cat-count">61 Products</div>
+    </a>
+    <a class="cat-card" href="#" onclick="filterCat('face')">
+      <div class="cat-icon">✨</div>
+      <div class="cat-name">Face Care</div>
+      <div class="cat-count">27 Products</div>
+    </a>
+    <a class="cat-card" href="#" onclick="filterCat('all')">
+      <div class="cat-icon">🛍️</div>
+      <div class="cat-name">All Items</div>
+      <div class="cat-count">168 Products</div>
+    </a>
+  </div>
+</section>
+
+<!-- FLASH SALE BANNER -->
+<section class="flash-banner" id="deals">
+  <div class="flash-inner">
+    <span class="flash-label">⚡ FLASH SALE</span>
+    <span class="flash-text">Up to <strong>60% OFF</strong> on selected beauty products. Limited time only!</span>
+    <div class="flash-timer">
+      <div class="timer-box">
+        <div class="timer-num" id="hrs">08</div>
+        <div class="timer-label">HRS</div>
+      </div>
+      <span class="timer-sep">:</span>
+      <div class="timer-box">
+        <div class="timer-num" id="mins">45</div>
+        <div class="timer-label">MIN</div>
+      </div>
+      <span class="timer-sep">:</span>
+      <div class="timer-box">
+        <div class="timer-num" id="secs">00</div>
+        <div class="timer-label">SEC</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products-section" id="products">
+  <div class="section-header">
+    <h2 class="section-title" id="productsTitle">Featured <span>Products</span></h2>
+    <a href="#" class="view-all">View All →</a>
+  </div>
+  <div class="products-grid" id="productsGrid"></div>
+</section>
+
+<!-- PROMO STRIP -->
+<section class="promo-strip">
+  <div class="promo-card">
+    <div class="promo-icon">🚚</div>
+    <div>
+      <div class="promo-title">Free Delivery</div>
+      <div class="promo-desc">On all orders above ₦20,000</div>
+    </div>
+  </div>
+  <div class="promo-card">
+    <div class="promo-icon">🔒</div>
+    <div>
+      <div class="promo-title">Secure Payment</div>
+      <div class="promo-desc">100% safe & encrypted checkout</div>
+    </div>
+  </div>
+  <div class="promo-card">
+    <div class="promo-icon">↩️</div>
+    <div>
+      <div class="promo-title">Easy Returns</div>
+      <div class="promo-desc">14-day hassle-free return policy</div>
+    </div>
+  </div>
+  <div class="promo-card">
+    <div class="promo-icon">🌍</div>
+    <div>
+      <div class="promo-title">AliExpress Sourced</div>
+      <div class="promo-desc">Authentic global products</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="#" class="logo">Glow<span style="color:white">Mart</span></a>
+      <p>Your premium destination for beauty, cosmetics, fragrances, and accessories. Sourced from trusted AliExpress sellers worldwide.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <a href="#">Home</a>
+      <a href="#">About Us</a>
+      <a href="#">Track Order</a>
+      <a href="#">Blog</a>
+    </div>
+    <div class="footer-col">
+      <h4>Categories</h4>
+      <a href="#">Cosmetics</a>
+      <a href="#">Perfumes</a>
+      <a href="#">Accessories</a>
+      <a href="#">Face Care</a>
+    </div>
+    <div class="footer-col">
+      <h4>Support</h4>
+      <a href="#">Contact Us</a>
+      <a href="#">FAQs</a>
+      <a href="#">Return Policy</a>
+      <a href="#">Privacy Policy</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 GlowMart. All rights reserved.</p>
+    <div class="pay-icons">
+      <span class="pay-icon">VISA</span>
+      <span class="pay-icon">MC</span>
+      <span class="pay-icon">PayPal</span>
+      <span class="pay-icon">Bank</span>
+    </div>
+  </div>
+</footer>
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+  <span class="toast-icon">✓</span>
+  <span id="toastMsg">Item added to cart!</span>
+</div>
+
+<script>
+// ─── PRODUCT DATA (AliExpress linked) ───────────────────────────────────────
+const products = [
+  {
+    id: 1, cat: 'cosmetics',
+    brand: 'Luxe Beauty',
+    name: 'Professional Matte Lipstick Set – 12 Shades Long-Lasting',
+    price: 4500, oldPrice: 8500, discount: 47,
+    rating: 4.8, reviews: 1240,
+    badge: 'sale',
+    img: 'https://ae01.alicdn.com/kf/S9f9b3d4e4b6b4e4b9f9b3d4e4b6b4e4b.jpg',
+    aliLink: 'https://www.aliexpress.com/wholesale?SearchText=matte+lipstick+set+12+shades'
+  },
+  {
+    id: 2, cat: 'perfumes',
+    brand: 'Aromatic',
+    name: 'Luxury Arabian Oud Perfume Eau de Parfum 100ml for Men & Women',
+    price: 12500, oldPrice: 20000, discount: 37,
+    rating: 4.9, reviews: 890,
+    badge: 'hot',
+    img: 'https://ae01.alicdn.com/kf/S1234567890abcdef.jpg',
+    aliLink: 'https://www.aliexpress.com/wholesale?SearchText=arabian+oud+perfume+100ml'
+  },
+  {
+    id: 3, cat: 'accessories',
+    brand: 'GoldLine',
+    name: '18K Gold Plated Pearl Drop Earrings Set – Elegant Jewelry',
+    price: 3200, oldPrice: 6000, discount: 46,
+    rating: 4.7, reviews: 532,
+    badge: 'new',
+    img: 'https://ae01.alicdn.com/kf/Sabc123def456.jpg',
+    aliLink: 'https://www.aliexpress.com/wholesale?SearchText=18k+gold+pearl+drop+earrings'
+  },
+  {
+    id: 4, cat: 'face',
+    brand: 'GlowSkin',
+    name: 'Vitamin C Brightening Face Serum 30ml – Dark Spot Corrector',
+    price: 6800, oldPrice: 10000, discount: 32,
+    rating: 4.6, reviews: 2100,
+    badge: 'sale',
+    img: 'https://ae01.alicdn.com/kf/Sdef789abc012.jpg',
+    aliLink: 'https://www.aliexpress.com/wholesale?SearchText=vitamin+c+brightening+face+serum+30ml'
+  },
+  {
+    id: 5, cat: 'cosmetics',
+    brand: 'Flawless',
+    name: 'Full Coverage Liquid Foundation – All Skin Tones SPF 15',
+    price: 5500, oldPrice: 9000, discount: 38,
+    rating: 4.5, reviews: 670,
+    badge: 'hot',
+    img: 'https://ae01.alicdn.com/kf/Sghi345jkl678.jpg',
+    aliLink: 'https://www.aliexpress.com/wholesale?SearchText=full+coverage+liquid+foundation+spf'
+  },
+  {
+    id: 6, cat: 'perfumes',
+    brand: 'FloraScent',
+    name: 'Rose & Jasmine Women\'s Perfume Gift Set – Floral Fragrance 50ml',
+    price: 9000, oldPrice: 15000, discount: 40,
+    rating: 4.8, reviews: 430,
+    badge: 'new',
+    img: 'https://ae01.alicdn.com/kf/Smno901pqr234.jpg',
+    aliLink: 'https://www.aliexpress.com/wholesale?SearchText=rose+jasmine+women+perfume+gift+set'
+  },
+  {
+    id: 7, cat: 'accessories',
+    brand: 'TrendSet',
+    name: 'Minimalist Gold Chain Bracelet Set – Stainless Steel Layered',
+    price: 2800, oldPrice: 5000, discount: 44,
+    rating: 4.6, reviews: 312,
+    badge: 'sale',
+    img: 'https://ae01.alicdn.com/kf/Sstu567vwx890.jpg',
+    aliLink: 'https://www.aliexpress.com/wholesale?SearchText=minimalist+gold+chain+bracelet+layered'
+  },
+  {
+    id: 8, cat: 'face',
+    brand: 'PureGlow',
+    name: 'Hyaluronic Acid Deep Moisturizing Face Cream 50ml – Anti-Aging',
+    price: 7500, oldPrice: 12000, discount: 37,
+    rating: 4.7, reviews: 1560,
+    badge: 'hot',
+    img: 'https://ae01.alicdn.com/kf/Syza123bcd456.jpg',
+    aliLink: 'https://www.aliexpress.com/wholesale?SearchText=hyaluronic+acid+moisturizing+face+cream+anti-aging'
+  },
+  {
+    id: 9, cat: 'cosmetics',
+    brand: 'ColorPop',
+    name: '20-Color Eyeshadow Palette – Shimmer & Matte Pigmented Powder',
+    price: 8200, oldPrice: 14000, discount: 41,
+    rating: 4.9, reviews: 2300,
+    badge: 'new',
+    img: 'https://ae01.alicdn.com/kf/Sefg789hij012.jpg',
+    aliLink: 'https://www.aliexpress.com/wholesale?SearchText=20+color+eyeshadow+palette+shimmer+matte'
+  },
+  {
+    id: 10, cat: 'accessories',
+    brand: 'LuxeHair',
+    name: 'Silk Satin Scrunchie Set 10pcs – No-Damage Hair Ties',
+    price: 1800, oldPrice: 3500, discount: 48,
+    rating: 4.4, reviews: 890,
+    badge: 'sale',
+    img: 'https://ae01.alicdn.com/kf/Sklm345nop678.jpg',
+    aliLink: 'https://www.aliexpress.com/wholesale?SearchText=silk+satin+scrunchie+set+10pcs'
+  },
+  {
+    id: 11, cat: 'face',
+    brand: 'ClearSkin',
+    name: 'Salicylic Acid Pore-Cleansing Face Wash 150ml – Acne Control',
+    price: 4200, oldPrice: 7000, discount: 40,
+    rating: 4.5, reviews: 740,
+    badge: 'hot',
+    img: 'https://ae01.alicdn.com/kf/Sqrs901tuv234.jpg',
+    aliLink: 'https://www.aliexpress.com/wholesale?SearchText=salicylic+acid+face+wash+acne+control'
+  },
+  {
+    id: 12, cat: 'perfumes',
+    brand: 'MajesticScent',
+    name: 'Unisex Woody Musk Cologne Spray 80ml – Long Lasting Premium',
+    price: 10500, oldPrice: 17000, discount: 38,
+    rating: 4.7, reviews: 620,
+    badge: 'new',
+    img: 'https://ae01.alicdn.com/kf/Swxy567zab890.jpg',
+    aliLink: 'https://www.aliexpress.com/wholesale?SearchText=woody+musk+cologne+spray+unisex'
+  }
+];
+
+// ─── CART ───────────────────────────────────────────────────────────────────
+let cart = [];
+let cartCount = 0;
+
+function addToCart(id) {
+  const p = products.find(x => x.id === id);
+  cart.push(p);
+  cartCount++;
+  document.getElementById('cartCount').textContent = cartCount;
+  showToast(`"${p.name.substring(0,30)}…" added to cart!`);
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  document.getElementById('toastMsg').textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+function openCart() {
+  showToast(cartCount === 0 ? 'Your cart is empty' : `You have ${cartCount} item(s) in cart`);
+}
+
+// ─── RENDER PRODUCTS ─────────────────────────────────────────────────────────
+function renderProducts(list, title) {
+  const grid = document.getElementById('productsGrid');
+  const titleEl = document.getElementById('productsTitle');
+
+  if (title) {
+    titleEl.innerHTML = title;
+  }
+
+  const stars = r => '★'.repeat(Math.floor(r)) + (r % 1 >= 0.5 ? '½' : '');
+
+  grid.innerHTML = list.map(p => `
+    <a class="product-card" href="${p.aliLink}" target="_blank" rel="noopener"
+       onclick="event.preventDefault(); goAli(${p.id})">
+      <div class="product-img">
+        <img src="${p.img}" alt="${p.name}"
+             onerror="this.style.display='none'; this.parentElement.innerHTML += '<div style=\'font-size:60px;padding:40px\'>${getCatEmoji(p.cat)}</div>'"/>
+        <div class="product-badges">
+          ${p.badge === 'sale' ? '<span class="badge-tag badge-sale">Sale</span>' : ''}
+          ${p.badge === 'new' ? '<span class="badge-tag badge-new">New</span>' : ''}
+          ${p.badge === 'hot' ? '<span class="badge-tag badge-hot">🔥 Hot</span>' : ''}
+        </div>
+        <button class="wishlist-btn" onclick="event.stopPropagation(); event.preventDefault(); showToast('Added to wishlist!')">
+          <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </button>
+      </div>
+      <div class="product-info">
+        <div class="product-brand">${p.brand}</div>
+        <div class="product-name">${p.name}</div>
+        <div class="product-rating">
+          <span class="stars">${stars(p.rating)}</span>
+          <span>${p.rating} (${p.reviews.toLocaleString()})</span>
+        </div>
+        <div class="product-price-row">
+          <span class="price-new">₦${p.price.toLocaleString()}</span>
+          <span class="price-old">₦${p.oldPrice.toLocaleString()}</span>
+          <span class="discount-pct">-${p.discount}%</span>
+        </div>
+        <div class="aliexpress-tag">🔗 Via <span>AliExpress</span> · Ships Worldwide</div>
+        <button class="add-cart-btn" onclick="event.stopPropagation(); event.preventDefault(); addToCart(${p.id})">
+          🛒 Add to Cart
+        </button>
+      </div>
+    </a>
+  `).join('');
+}
+
+function getCatEmoji(cat) {
+  return {cosmetics:'💄', perfumes:'🌸', accessories:'💍', face:'✨'}[cat] || '🛍️';
+}
+
+function goAli(id) {
+  const p = products.find(x => x.id === id);
+  window.open(p.aliLink, '_blank');
+}
+
+function filterCat(cat) {
+  if (cat === 'all') {
+    renderProducts(products, 'All <span>Products</span>');
+  } else {
+    const filtered = products.filter(p => p.cat === cat);
+    const labels = {cosmetics:'Cosmetics', perfumes:'Perfumes & Fragrance', accessories:'Accessories', face:'Face Care'};
+    renderProducts(filtered, `${labels[cat]} <span>Products</span>`);
+  }
+  document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
+}
+
+function doSearch() {
+  const q = document.getElementById('searchInput').value.toLowerCase().trim();
+  if (!q) { renderProducts(products, 'All <span>Products</span>'); return; }
+  const res = products.filter(p =>
+    p.name.toLowerCase().includes(q) ||
+    p.brand.toLowerCase().includes(q) ||
+    p.cat.includes(q)
+  );
+  renderProducts(res, `Results for "<span>${q}</span>"`);
+  document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
+}
+
+document.getElementById('searchInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') doSearch();
+});
+
+// ─── COUNTDOWN TIMER ─────────────────────────────────────────────────────────
+let end = Date.now() + 8 * 3600000 + 45 * 60000;
+
+function tick() {
+  let diff = Math.max(0, end - Date.now());
+  let h = Math.floor(diff / 3600000);
+  let m = Math.floor((diff % 3600000) / 60000);
+  let s = Math.floor((diff % 60000) / 1000);
+  document.getElementById('hrs').textContent = String(h).padStart(2,'0');
+  document.getElementById('mins').textContent = String(m).padStart(2,'0');
+  document.getElementById('secs').textContent = String(s).padStart(2,'0');
+  setTimeout(tick, 1000);
+}
+
+// ─── INIT ────────────────────────────────────────────────────────────────────
+renderProducts(products);
+tick();
+</script>
+</body>
+</html>
